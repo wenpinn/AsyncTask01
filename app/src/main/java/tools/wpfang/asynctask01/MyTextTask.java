@@ -12,6 +12,7 @@ public class MyTextTask extends AsyncTask<Void,Integer,String> {
     ProgressDialog pd;
     Context mContext;
     TextView tv;
+    boolean bstop=false;
     public MyTextTask(Context ct,TextView txt)
     {
         mContext=ct;
@@ -19,6 +20,7 @@ public class MyTextTask extends AsyncTask<Void,Integer,String> {
     }
     @Override
     protected void onPreExecute() {
+        bstop=false;
         pd=new ProgressDialog(mContext);
         pd.setTitle("Downloading");
         pd.setMessage("Please wait!!!");
@@ -26,8 +28,8 @@ public class MyTextTask extends AsyncTask<Void,Integer,String> {
         pd.setButton(ProgressDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                cancel(true);
-                
+              //  cancel(true);
+                bstop=true;
                 dialogInterface.cancel();
 
             }
@@ -39,7 +41,7 @@ public class MyTextTask extends AsyncTask<Void,Integer,String> {
     @Override
     protected String doInBackground(Void... voids) {
         try {
-        for(int i=0;i<=100;i++) {
+        for(int i=0;i<=100 && bstop==false;i++) {
                 Thread.sleep(100);
                 publishProgress(i);
                 Log.i("ASYNCTASKTHREAD","Thread"+i);
