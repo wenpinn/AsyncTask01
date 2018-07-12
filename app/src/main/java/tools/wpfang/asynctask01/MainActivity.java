@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv;
+    static TextView tv;
     int counter=0;
     MyTextTask myTextTask;
     @Override

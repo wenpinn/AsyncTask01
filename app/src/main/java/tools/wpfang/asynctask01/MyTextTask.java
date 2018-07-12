@@ -26,8 +26,10 @@ public class MyTextTask extends AsyncTask<Void,Integer,String> {
         pd.setButton(ProgressDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
                 cancel(true);
+                
+                dialogInterface.cancel();
+
             }
         });
         pd.setMax(100);
@@ -38,7 +40,7 @@ public class MyTextTask extends AsyncTask<Void,Integer,String> {
     protected String doInBackground(Void... voids) {
         try {
         for(int i=0;i<=100;i++) {
-               Thread.sleep(100);
+                Thread.sleep(100);
                 publishProgress(i);
                 Log.i("ASYNCTASKTHREAD","Thread"+i);
         }
@@ -57,7 +59,9 @@ public class MyTextTask extends AsyncTask<Void,Integer,String> {
 
     @Override
     protected void onPostExecute(String s) {
-       tv.setText(s);
         pd.dismiss();
+       // MainActivity.tv.setText(s);
+        tv.setText(s);
+
     }
 }
